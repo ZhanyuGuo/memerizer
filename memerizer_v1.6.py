@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 import pandas as pd
 
@@ -35,8 +34,8 @@ class MemerizerGUI(QMainWindow):
         self.MainWindowUI.setupUi(self)
         self.MainWindowUI.pushButtonPause.setVisible(False)
         self.MainWindowUI.pushButtonPrevious.setVisible(False)
-        self.setButtonColor()
         self.setFixedSize(self.width(), self.height())
+        self.setButtonColor()
 
         # MainWindow function
         self.MainWindowUI.pushButton0.clicked.connect(self.pushButton0Clicked)
@@ -97,15 +96,14 @@ class MemerizerGUI(QMainWindow):
         word = self.data.loc[self.wordIdx, "word"]
         pos = [self.data.loc[i, "pos"] for i in wordIdxList]
         meaning = [self.data.loc[i, "meaning"] for i in wordIdxList]
+
         return answer, word, pos, meaning
 
     def setButtonColor(self):
-        # fmt: off
         self.MainWindowUI.pushButton0.setStyleSheet("background-color: rgb{}".format(self.colorList[0]))
         self.MainWindowUI.pushButton1.setStyleSheet("background-color: rgb{}".format(self.colorList[1]))
         self.MainWindowUI.pushButton2.setStyleSheet("background-color: rgb{}".format(self.colorList[2]))
         self.MainWindowUI.pushButton3.setStyleSheet("background-color: rgb{}".format(self.colorList[3]))
-        # fmt: on
 
     def answerEvent(self, choice):
         self.colorList = [GREY for _ in range(4)]
@@ -199,7 +197,7 @@ class MemerizerGUI(QMainWindow):
         try:
             self.data.to_excel(self.excelFile, index=False)
         except Exception as ex:
-            w = QMessageBox.critical(self, "Message", "{}\r\n[Hint] Maybe the xlsx is occupied.".format(ex))
+            QMessageBox.critical(self, "Message", "{}\r\n[Hint] Maybe the xlsx is occupied.".format(ex))
             return False
         else:
             return True

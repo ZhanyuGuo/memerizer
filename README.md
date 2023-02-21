@@ -5,6 +5,7 @@ This is a simple software to help you memorize words.
 1. Create an environment. (Conda is recommended.)
    ```sh
    conda create -n memerizer python=3.9
+   conda activate memerizer
    ```
 2. Install the requirements using pip.
    ```sh
